@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  background-color: #111827; /* bg-gray-900 equivalent */
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+select {
+  font-family: 'Heebo', sans-serif;
+}
+
+option {
+  font-family: 'Heebo', sans-serif;
+}
+
+/* Dark scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937; /* bg-gray-800 equivalent */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4c1d95; /* bg-purple-900 equivalent */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6d28d9; /* bg-purple-700 equivalent */
+}
