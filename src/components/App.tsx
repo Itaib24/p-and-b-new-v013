@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { messages } from '../data/messages';
 import { ChatWindow } from '../plugins/Chat';
 import { Header } from './layout/Header';
-import { TabNavigation } from './tabs/TabNavigation';
-import { Overview } from './tabs/Overview';
-import { MealPlan } from './tabs/MealPlan';
-import { Training } from './tabs/Training';
-import { WorkoutLogs } from './tabs/WorkoutLogs';
-import { FirstWeekWorkouts } from './tabs/FirstWeekWorkouts';
-import { UsersOverview } from './tabs/UsersOverview';
+import { TabNavigation } from './pages/TabNavigation';
+import { Overview } from './pages/Overview';
+import { MealPlanPage } from './pages/MealPlanPage';
+import { Training } from './pages/Training';
+import { WorkoutLogs } from './pages/WorkoutLogs';
+import { FirstWeekWorkouts } from './pages/FirstWeekWorkouts';
+import { UsersOverview } from './pages/UsersOverview';
 import { AdminPanel } from './users/AdminPanel';
 import { Dumbbell, MessageSquare, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { getOverviewById } from '../data/overview';
@@ -184,7 +184,7 @@ function App() {
                   isTrainerView={true}
                 />
               )}
-              {activeTab === "mealplan" && <MealPlan />}
+              {activeTab === "mealplan" && <MealPlanPage />}
               {activeTab === "training" && <Training userId={selectedUserId} />}
               {activeTab === "workoutlogs" && <WorkoutLogs />}
               {activeTab === "firstweek" && <FirstWeekWorkouts userId={selectedUserId} />}
@@ -224,7 +224,7 @@ function App() {
                 isTrainerView={true}
               />
             )}
-            {activeTab === "mealplan" && <MealPlan />}
+            {activeTab === "mealplan" && <MealPlanPage />}
             {activeTab === "training" && <Training userId={selectedUserId} />}
             {activeTab === "workoutlogs" && <WorkoutLogs />}
             {activeTab === "firstweek" && <FirstWeekWorkouts userId={selectedUserId} />}
