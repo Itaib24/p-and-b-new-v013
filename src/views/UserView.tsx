@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Layout, Calendar, Dumbbell, ClipboardList, Map } from 'lucide-react';
-import { Overview } from '../components/tabs/Overview';
+import { Overview } from '../components/pages/Overview';
 import { UserMealPlan } from '../components/user/UserMealPlan';
 import { UserWorkoutPlan } from '../components/user/UserWorkoutPlan';
 import { WorkoutLogger } from '../components/user/WorkoutLogger';

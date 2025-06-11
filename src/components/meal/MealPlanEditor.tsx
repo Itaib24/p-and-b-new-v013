@@ -6,7 +6,7 @@ import { Utensils, Plus, Trash2, Eye, EyeOff, Save, FileDown, Check, Info, Alert
 import { useMealPlan } from '../../contexts/MealPlanContext';
 import { ClientAdjustmentButton, AdjustmentHistoryButton } from '../trainer/ClientAdjustmentButton';
 
-export const MealPlan: React.FC = () => {
+export const MealPlanEditor: React.FC = () => {
   const [meals, setMeals] = useState<{
     id: string;
     name: string;
