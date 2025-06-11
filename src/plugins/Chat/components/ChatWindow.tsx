@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Message as MessageComponent } from './Message';
 import { ChatInput } from './ChatInput';
-import { calculateEngagementRate } from '../../utils/engagementUtils';
-import { Message } from '../../types/chat';
+import { calculateEngagementRate } from '../../../utils/engagementUtils';
+import { Message } from '../../../types/chat';
 
 interface ChatWindowProps {
   messages: Message[];

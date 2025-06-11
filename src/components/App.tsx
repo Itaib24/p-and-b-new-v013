@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { messages } from '../data/messages';
-import { ChatWindow } from './chat';
+import { ChatWindow } from '../plugins/Chat';
 import { Header } from './layout/Header';
 import { TabNavigation } from './tabs/TabNavigation';
 import { Overview } from './tabs/Overview';
