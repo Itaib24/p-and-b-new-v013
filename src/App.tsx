@@ -10,6 +10,7 @@ import { WorkoutTemplateProvider } from './contexts/WorkoutTemplateContext';
 import { WorkoutPlanTemplateProvider } from './contexts/WorkoutPlanTemplateContext';
 import { UserScopeVisibilityProvider } from './contexts/UserScopeVisibilityContext';
 import { ProgressProvider } from './contexts/ProgressTrackingContext';
+import PluginsManager from './PluginsManager';
 
 function App() {
   const [view, setView] = useState<'select' | 'trainer' | 'user' | 'admin'>('select');
@@ -22,6 +23,7 @@ function App() {
           <WorkoutTemplateProvider>
             <WorkoutPlanTemplateProvider>
               <ProgressProvider>
+                <PluginsManager />
                 <UserScopeVisibilityProvider>
                   {view === 'trainer' ? (
                     <TrainerView onBackToSelect={() => setView('select')} />
