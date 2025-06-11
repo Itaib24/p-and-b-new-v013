@@ -11,7 +11,7 @@ interface MealTemplate {
   }[];
 }
 
-interface MealPlan {
+export interface MealPlan {
   id: string;
   userId: string;
   hideMacros: boolean;

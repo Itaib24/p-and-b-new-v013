@@ -12,6 +12,8 @@ import { UsersOverview } from './pages/UsersOverview';
 import { AdminPanel } from './users/AdminPanel';
 import { Dumbbell, MessageSquare, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { getOverviewById } from '../data/overview';
+import { useGlobalState } from '../utils/globalState';
+import { orchestrateMessage } from '../utils/orchestrator';
 
 function App() {
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
@@ -21,6 +23,8 @@ function App() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showChat, setShowChat] = useState(true);
   const [showLeftPanel, setShowLeftPanel] = useState(false);
+
+  const [globalState, globalActions] = useGlobalState(selectedUserId || '');
 
   const handleSendMessage = (message: string) => {
     const newMessage = {
@@ -36,6 +40,22 @@ function App() {
       text: message,
     };
     setChatMessages([...chatMessages, newMessage]);
+    if (selectedUserId) {
+      const reply = orchestrateMessage(message, globalState, globalActions);
+      const responseMessage = {
+        time: new Date().toLocaleString('en-US', {
+          weekday: 'short',
+          month: 'short',
+          day: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true,
+        }),
+        text: reply,
+      };
+      setChatMessages((msgs) => [...msgs, responseMessage]);
+    }
   };
 
   const handleEngagementRateChange = (rate: number) => {
