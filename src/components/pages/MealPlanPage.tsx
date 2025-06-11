@@ -5,7 +5,7 @@ import { MacroRange, MealCategory } from '../../types/food';
 import { Utensils, Plus, Trash2, Eye, EyeOff, Save, FileDown, Check, Info, AlertCircle } from 'lucide-react';
 import { useMealPlan } from '../../contexts/MealPlanContext';
 
-export const MealPlan: React.FC = () => {
+export const MealPlanPage: React.FC = () => {
   const [meals, setMeals] = useState<{
     id: string;
     name: string;
