@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { messages } from '../data/messages';
 import { ChatWindow } from '../plugins/Chat';
+import { ChatProvider } from '../contexts/ChatContext';
 import { Header } from './layout/Header';
 import { TabNavigation } from './pages/TabNavigation';
 import { Overview } from './pages/Overview';
@@ -16,27 +16,10 @@ import { getOverviewById } from '../data/overview';
 function App() {
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("overview");
-  const [chatMessages, setChatMessages] = useState(messages);
   const [engagementRate, setEngagementRate] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showChat, setShowChat] = useState(true);
   const [showLeftPanel, setShowLeftPanel] = useState(false);
-
-  const handleSendMessage = (message: string) => {
-    const newMessage = {
-      time: new Date().toLocaleString('en-US', {
-        weekday: 'short',
-        month: 'short',
-        day: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
-      }),
-      text: message,
-    };
-    setChatMessages([...chatMessages, newMessage]);
-  };
 
   const handleEngagementRateChange = (rate: number) => {
     setEngagementRate(rate);
@@ -65,31 +48,27 @@ function App() {
     return 'scale-98 opacity-0';
   };
 
-  if (!selectedUserId) {
-    return (
-      <div 
-        className={`h-screen bg-gray-900 font-sans transition-all duration-200 ease-out transform-gpu ${getTransitionClasses()}`}
-      >
-        <div className="bg-gray-800 border-b border-gray-700 px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
-                <Dumbbell className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-xl font-bold text-gray-200">Raeda-AI</span>
+  const content = !selectedUserId ? (
+    <div
+      className={`h-screen bg-gray-900 font-sans transition-all duration-200 ease-out transform-gpu ${getTransitionClasses()}`}
+    >
+      <div className="bg-gray-800 border-b border-gray-700 px-4 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
+              <Dumbbell className="w-6 h-6 text-white" />
             </div>
-            <h1 className="text-xl font-bold text-gray-200">Users Overview</h1>
+            <span className="text-xl font-bold text-gray-200">Raeda-AI</span>
           </div>
-        </div>
-        <div className="p-6">
-          <UsersOverview onUserSelect={handleUserSelect} />
+          <h1 className="text-xl font-bold text-gray-200">Users Overview</h1>
         </div>
       </div>
-    );
-  }
-
-  return (
-    <div 
+      <div className="p-6">
+        <UsersOverview onUserSelect={handleUserSelect} />
+      </div>
+    </div>
+  ) : (
+    <div
       className={`h-screen bg-gray-900 font-sans transition-all duration-200 ease-out transform-gpu ${getTransitionClasses()}`}
     >
       {/* Mobile Toggle Navigation */}
@@ -154,9 +133,8 @@ function App() {
               </div>
             </div>
             <Header userId={selectedUserId} />
-            <ChatWindow 
-              messages={chatMessages} 
-              onSendMessage={handleSendMessage}
+            <ChatWindow
+              userId={selectedUserId}
               onEngagementRateChange={handleEngagementRateChange}
             />
           </div>
@@ -198,9 +176,8 @@ function App() {
         {/* Mobile Chat Panel */}
         <div className={`h-full ${!showChat ? 'hidden' : ''}`}>
           <Header userId={selectedUserId} />
-          <ChatWindow 
-            messages={chatMessages} 
-            onSendMessage={handleSendMessage}
+          <ChatWindow
+            userId={selectedUserId}
             onEngagementRateChange={handleEngagementRateChange}
           />
         </div>
@@ -233,6 +210,8 @@ function App() {
       </div>
     </div>
   );
+
+  return <ChatProvider>{content}</ChatProvider>;
 }
 
 export default App;

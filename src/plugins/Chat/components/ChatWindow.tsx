@@ -2,19 +2,20 @@ import React, { useEffect } from 'react';
 import { Message as MessageComponent } from './Message';
 import { ChatInput } from './ChatInput';
 import { calculateEngagementRate } from '../../../utils/engagementUtils';
-import { Message } from '../../../types/chat';
+import { useChat } from '../../../contexts/ChatContext';
 
 interface ChatWindowProps {
-  messages: Message[];
-  onSendMessage: (message: string) => void;
+  userId: string;
   onEngagementRateChange?: (rate: number) => void;
 }
 
-export const ChatWindow: React.FC<ChatWindowProps> = ({ 
-  messages, 
-  onSendMessage,
-  onEngagementRateChange 
+export const ChatWindow: React.FC<ChatWindowProps> = ({
+  userId,
+  onEngagementRateChange
 }) => {
+  const { sendMessage, getHistory } = useChat();
+  const messages = getHistory(userId);
+
   useEffect(() => {
     const engagementRate = calculateEngagementRate(messages);
     onEngagementRateChange?.(engagementRate);
@@ -32,7 +33,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
           />
         ))}
       </div>
-      <ChatInput onSendMessage={onSendMessage} />
+      <ChatInput onSendMessage={(text) => sendMessage(userId, text)} />
     </div>
   );
 };
