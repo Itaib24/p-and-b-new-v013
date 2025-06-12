@@ -14,7 +14,9 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-draggable": "^4.4.6",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "openai": "^4.39.2",
+    "@pinecone-database/pinecone": "^1.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.12.0",
