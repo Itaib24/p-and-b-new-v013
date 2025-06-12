@@ -20,6 +20,7 @@ export class ProgressAnalyzer {
       
       deltaLBM = lbm - previousLBM;
       deltaFM = previousFatMass - fatMass;
+      const fatMassChange = previousFatMass - fatMass;
       
       if (data.goal === 'muscle_gain' && (data.weight > data.previousWeight)) {
         muscleGainEfficiency = (deltaLBM / (data.weight - data.previousWeight)) * 100;
